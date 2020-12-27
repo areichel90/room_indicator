@@ -6,7 +6,7 @@ digital_pin = board.D18  # digital pin on rpi
 led_count = 8
 
 def main():
-    pixels = neopixel.NeoPixel(, led_count)
+    pixels = neopixel.NeoPixel(digital_pin, led_count)
 
 
 if __name__ == '__main__':
