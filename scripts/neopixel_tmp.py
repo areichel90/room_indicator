@@ -5,7 +5,7 @@ digital_pin = board.D18  # digital pin on rpi
 pixel_count = 8
 order = neopixel.RGB
 
-def main(pixels = pixels):
+def main(pixels):
     # flash all elements 
     i = 0
     dwell = 0.25
