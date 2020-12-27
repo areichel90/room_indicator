@@ -1,4 +1,4 @@
-#import board
+import board
 import neopixel
 
 # global variables
