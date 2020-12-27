@@ -10,4 +10,9 @@ def main():
 
 
 if __name__ == '__main__':
+    print('Starting NeoPixel Test Script!')
+
+    # run main function
     main()
+
+    print('Test Script Completed.')
