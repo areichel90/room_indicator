@@ -59,7 +59,7 @@ def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, 
         time.sleep(dwell)
         pixels[i]=(0,0,0,0)
 
-def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, pixel_count=pixel_count, sustain=None, verbost=True):
+def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, pixel_count=pixel_count, sustain=None, verbose=True):
     '''
     '''
     # calculate dwell from speed
