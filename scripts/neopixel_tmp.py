@@ -68,7 +68,7 @@ def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, pixel_count=pixel_count
     if verbose: print(f'speed: {speed}\tdwell: {dwell}')
 
     for b in range(100):
-        print(f'brightness: {i}')
+        print(f'brightness: {b}')
 
         pixels.brightness = b/100
         pixels.fill(rgbw)
