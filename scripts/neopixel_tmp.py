@@ -5,6 +5,9 @@ digital_pin = board.D18  # digital pin on rpi
 pixel_count = 8
 order = neopixel.RGBW
 
+# misc
+colors = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255)]
+
 def main(pixels):
     # flash all elements 
     i = 0
@@ -23,27 +26,8 @@ def main(pixels):
         solid_color(sustain=dwell, pixels = pixels)
         i += 1
 
-    '''# light up each pixel one, at a time
-    while True:
-        print('Starting Scrolling Sequence')
-        for i in range(pixel_count):
-            print(f'pixel: {i}')
-            # turn pixel on
-            pixels[i] = (0, 0, 0, 255)
-            pixels.show()
-            time.sleep(dwell)
-            # turn pixel off
-            pixels[i] = (0, 0, 0, 0)
-            #time.sleep(dwell)
-        for i in range(1,7):
-            i = (pixel_count-1)-i
-            print(f'pixels: {i}')
-            pixels[i]=(0, 0, 0, 255)
-            pixels.show()
-            time.sleep(dwell)
-            pixels[i]=(0,0,0,0)'''
-
-    scrolling_color(pixels, (0,0,0,255))
+    for color in colors:
+        scrolling_color(pixels, color=color, speed = 0.5)
 
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, verbose=True):
