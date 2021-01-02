@@ -10,10 +10,10 @@ def main(pixels):
     i = 0
     dwell = 1.0/8  # seconds
 
-    # countdown
+    '''# countdown
     for j in range(5):
         print(f'{5-j}...')
-        time.sleep(1)
+        time.sleep(1)'''
 
     print('Starting Flashing Sequence')
     while i <= 2:
@@ -43,21 +43,23 @@ def main(pixels):
             time.sleep(dwell)
             pixels[i]=(0,0,0,0)'''
 
-    
+    scrolling_color(pixels, (0,0,0,255))
+
+
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, verbose=True):
     '''
     Function to scroll color through each pixel one element at a time (no fade)
     '''
     # calculate dwell from speed
     num_elements = (pixel_count*2) - 1 
-    dwell = (speed * num_elements)/60
+    dwell = 1/(speed * num_elements)
     if verbose: print(f'speed: {speed}\tdwell: {dwell}')
 
     # light up each pixel one, at a time
+    print('Starting Scrolling Sequence')
     while True:
-        print('Starting Scrolling Sequence')
         for i in range(pixel_count):
-            print(f'pixel: {i}')
+            #print(f'pixel: {i}')
             # turn pixel on
             pixels[i] = (0, 0, 0, 255)
             pixels.show()
@@ -67,7 +69,7 @@ def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, 
             #time.sleep(dwell)
         for i in range(1,7):
             i = (pixel_count-1)-i
-            print(f'pixels: {i}')
+            #print(f'pixels: {i}')
             pixels[i]=(0, 0, 0, 255)
             pixels.show()
             time.sleep(dwell)
