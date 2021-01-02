@@ -8,13 +8,26 @@ order = neopixel.RGB
 def main(pixels):
     # flash all elements 
     i = 0
-    dwell = 0.25
+    dwell = 0.1
     while i <= 3:
         # turn led's on
         solid_color(rgbw=[0,0,0,255], sustain=dwell, pixels=pixels)
         # turn led's off
         solid_color(sustain=dwell, pixels = pixels)
         i += 1
+
+    # light up each pixel one, at a time
+    while True:
+    for i in range(pixel_count):
+        # turn pixel on
+        pixels[i] = (0, 0, 0, 255)
+        time.sleep(dwell)
+        # turn pixel off
+        pixels[i] = (0, 0, 0, 0)
+        time.sleep(dwell)
+
+
+    
 
 
 def solid_color(pixels, rgbw=[0,0,0,0], sustain=None, verbose=True):
