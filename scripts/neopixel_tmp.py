@@ -2,8 +2,9 @@ import board, neopixel, time
 
 # global variables
 digital_pin = board.D18  # digital pin on rpi
-pixel_count = 8
+pixel_count = 8*2
 order = neopixel.GRBW
+max_brightness = 50  # percent
 
 # misc
 colors = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255)]
@@ -34,9 +35,9 @@ def main(pixels):
 
     # breathing color
     while True:
-        breathing_color(pixels, speed=5.0)
+        breathing_color(pixels, speed=0.5, verbose=False)
 
-def scrolling_color(pixels, rgbw=[0,0,0,0], speed=3.0, pixel_count=pixel_count, verbose=True):
+def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, verbose=True):
     '''
     Function to scroll color through each pixel one element at a time (no fade)
     '''
@@ -72,16 +73,15 @@ def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, pixel_count=pixel_count
     dwell = 1/(speed * num_elements)
     if verbose: print(f'speed: {speed}\tdwell: {dwell}')
 
-    for b in range(100):
+    for b in range(max_brightness):
         print(f'brightness: {b}')
-
         pixels.brightness = b/100
         pixels.fill(rgbw)
         pixels.show()
         time.sleep(dwell)
-    for b in range(100):
+    for b in range(max_brightness):
+        b = (max_brightness-1) - b
         print(f'brightness: {b}')
-        b = (100-1) - b
         pixels.brightness = b/100
         pixels.fill(rgbw)
         pixels.show()
