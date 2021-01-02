@@ -27,7 +27,7 @@ def main(pixels):
         i += 1
 
     for color in colors:
-        scrolling_color(pixels, color=color, speed = 0.5)
+        scrolling_color(pixels, rgbw=color, speed = 0.5)
 
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, verbose=True):
@@ -45,7 +45,7 @@ def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, 
         for i in range(pixel_count):
             #print(f'pixel: {i}')
             # turn pixel on
-            pixels[i] = (0, 0, 0, 255)
+            pixels[i] = rgbw
             pixels.show()
             time.sleep(dwell)
             # turn pixel off
@@ -54,7 +54,7 @@ def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, 
         for i in range(1,7):
             i = (pixel_count-1)-i
             #print(f'pixels: {i}')
-            pixels[i]=(0, 0, 0, 255)
+            pixels[i]= rgbw
             pixels.show()
             time.sleep(dwell)
             pixels[i]=(0,0,0,0)
