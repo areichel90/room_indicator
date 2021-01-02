@@ -3,13 +3,20 @@ import board, neopixel, time
 # global variables
 digital_pin = board.D18  # digital pin on rpi
 pixel_count = 8
-order = neopixel.RGB
+order = neopixel.RGBW
 
 def main(pixels):
     # flash all elements 
     i = 0
-    dwell = 0.1
-    while i <= 3:
+    dwell = 1.0/8  # seconds
+
+    # countdown
+    for j in range(5):
+        print(f'{5-j}...')
+        time.sleep(1)
+
+    print('Starting Flashing Sequence')
+    while i <= 2:
         # turn led's on
         solid_color(rgbw=[0,0,0,255], sustain=dwell, pixels=pixels)
         # turn led's off
@@ -18,14 +25,23 @@ def main(pixels):
 
     # light up each pixel one, at a time
     while True:
+        print('Starting Scrolling Sequence')
         for i in range(pixel_count):
+            print(f'pixel: {i}')
             # turn pixel on
             pixels[i] = (0, 0, 0, 255)
+            pixels.show()
             time.sleep(dwell)
             # turn pixel off
             pixels[i] = (0, 0, 0, 0)
+            #time.sleep(dwell)
+        for i in range(1,7):
+            i = (pixel_count-1)-i
+            print(f'pixels: {i}')
+            pixels[i]=(0, 0, 0, 255)
+            pixels.show()
             time.sleep(dwell)
-
+            pixels[i]=(0,0,0,0)
 
     
 
