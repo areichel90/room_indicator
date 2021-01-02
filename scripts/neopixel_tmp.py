@@ -26,6 +26,7 @@ def main(pixels):
         solid_color(sustain=dwell, pixels = pixels)
         i += 1
 
+    while True:
     for color in colors:
         scrolling_color(pixels, rgbw=color, speed = 0.5)
 
@@ -41,23 +42,22 @@ def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, 
 
     # light up each pixel one, at a time
     print('Starting Scrolling Sequence')
-    while True:
-        for i in range(pixel_count):
-            #print(f'pixel: {i}')
-            # turn pixel on
-            pixels[i] = rgbw
-            pixels.show()
-            time.sleep(dwell)
-            # turn pixel off
-            pixels[i] = (0, 0, 0, 0)
-            #time.sleep(dwell)
-        for i in range(1,7):
-            i = (pixel_count-1)-i
-            #print(f'pixels: {i}')
-            pixels[i]= rgbw
-            pixels.show()
-            time.sleep(dwell)
-            pixels[i]=(0,0,0,0)
+    for i in range(pixel_count):
+        #print(f'pixel: {i}')
+        # turn pixel on
+        pixels[i] = rgbw
+        pixels.show()
+        time.sleep(dwell)
+        # turn pixel off
+        pixels[i] = (0, 0, 0, 0)
+        #time.sleep(dwell)
+    for i in range(1,7):
+        i = (pixel_count-1)-i
+        #print(f'pixels: {i}')
+        pixels[i]= rgbw
+        pixels.show()
+        time.sleep(dwell)
+        pixels[i]=(0,0,0,0)
 
 def solid_color(pixels, rgbw=[0,0,0,0], sustain=None, verbose=True):
     '''
