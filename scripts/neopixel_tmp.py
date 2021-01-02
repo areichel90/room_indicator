@@ -4,10 +4,11 @@ import board, neopixel, time
 
 # global variables
 digital_pin = board.D18  # digital pin on rpi
-pixel_count = 8
+pixel_count = 8*2
 order = neopixel.GRBW
 
 # misc
+max_brightness = 50  # percent
 colors = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255)]
 
 def main(pixels):
@@ -36,7 +37,12 @@ def main(pixels):
 
     # breathing color
     while True:
-        breathing_color(pixels, speed=5.0)
+        rgbw = np.random.rand(1,4)*255
+        rgbw = rgbw[0].tolist()
+        rgbw = np.around(rgbw)
+        rgbw = rgbw.astype(int)
+        rgbw[3] = 0
+        breathing_color(pixels, rgbw=rgbw, speed=0.5, fade_smoothness=100, verbose=False)
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=3.0, pixel_count=pixel_count, verbose=True):
     '''
@@ -66,24 +72,24 @@ def scrolling_color(pixels, rgbw=[0,0,0,0], speed=3.0, pixel_count=pixel_count, 
         time.sleep(dwell)
         pixels[i]=(0,0,0,0)
 
-def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, pixel_count=pixel_count, sustain=None, verbose=True):
+def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, fade_smoothness=200, sustain=None, verbose=True):
     '''
     '''
     # calculate dwell from speed
     num_elements = (pixel_count*2) - 1 
-    dwell = 1/(speed * num_elements)
-    if verbose: print(f'speed: {speed}\tdwell: {dwell}')
+    dwell = 1/(speed * fade_smoothness*2)
+    print(f'color: {rgbw}\tspeed: {speed}\tdwell: {dwell}')
+    if verbose: print(f'color: {rgbw}\tspeed: {speed}\tdwell: {dwell}')
 
-    for b in np.linspace(0,100, 500):
-        print(f'brightness: {b}')
-
+    for b in np.linspace(0,max_brightness,fade_smoothness):
+        if verbose: print(f'brightness: {b}')
         pixels.brightness = b/100
         pixels.fill(rgbw)
         pixels.show()
         time.sleep(dwell)
-    for b in range(100):
-        print(f'brightness: {b}')
-        b = (100-1) - b
+    for b in np.linspace(0,max_brightness,fade_smoothness):
+        b = (max_brightness-1) - b
+        if verbose: print(f'brightness: {b}')
         pixels.brightness = b/100
         pixels.fill(rgbw)
         pixels.show()
