@@ -36,7 +36,7 @@ def main(pixels):
     while True:
         breathing_color(pixels)
 
-def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, verbose=True):
+def scrolling_color(pixels, rgbw=[0,0,0,0], speed=3.0, pixel_count=pixel_count, verbose=True):
     '''
     Function to scroll color through each pixel one element at a time (no fade)
     '''
@@ -80,6 +80,7 @@ def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, pixel_count=pixel_count
         pixels.show()
         time.sleep(dwell)
     for b in range(100):
+        print(f'brightness: {b}')
         b = (100-1) - b
         pixels.brightness = b/100
         pixels.fill(rgbw)
