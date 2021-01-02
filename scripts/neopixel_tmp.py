@@ -25,11 +25,16 @@ def main(pixels):
         # turn led's off
         solid_color(sustain=dwell, pixels = pixels)
         i += 1
+
+    # single element scrolling sequence
     '''
     while True:
         for color in colors:
             scrolling_color(pixels, rgbw=color, speed = 0.5)'''
 
+    # breathing color
+    while True:
+        breathing_color(pixels)
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, verbose=True):
     '''
