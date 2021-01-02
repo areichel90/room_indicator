@@ -18,13 +18,13 @@ def main(pixels):
 
     # light up each pixel one, at a time
     while True:
-    for i in range(pixel_count):
-        # turn pixel on
-        pixels[i] = (0, 0, 0, 255)
-        time.sleep(dwell)
-        # turn pixel off
-        pixels[i] = (0, 0, 0, 0)
-        time.sleep(dwell)
+        for i in range(pixel_count):
+            # turn pixel on
+            pixels[i] = (0, 0, 0, 255)
+            time.sleep(dwell)
+            # turn pixel off
+            pixels[i] = (0, 0, 0, 0)
+            time.sleep(dwell)
 
 
     
