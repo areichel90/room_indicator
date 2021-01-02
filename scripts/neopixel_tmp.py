@@ -3,7 +3,7 @@ import board, neopixel, time
 # global variables
 digital_pin = board.D18  # digital pin on rpi
 pixel_count = 8
-order = neopixel.RGBW
+order = neopixel.GRBW
 
 # misc
 colors = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255)]
@@ -27,8 +27,8 @@ def main(pixels):
         i += 1
 
     while True:
-    for color in colors:
-        scrolling_color(pixels, rgbw=color, speed = 0.5)
+        for color in colors:
+            scrolling_color(pixels, rgbw=color, speed = 0.5)
 
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, verbose=True):
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     pixels = neopixel.NeoPixel(
         digital_pin, 
         pixel_count, 
-        brightness=0.2,
+        brightness=0.5,
         auto_write=False,
         pixel_order=order)
 
