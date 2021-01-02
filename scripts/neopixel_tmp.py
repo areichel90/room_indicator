@@ -34,7 +34,7 @@ def main(pixels):
 
     # breathing color
     while True:
-        breathing_color(pixels)
+        breathing_color(pixels, speed=5.0)
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=3.0, pixel_count=pixel_count, verbose=True):
     '''
