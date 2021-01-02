@@ -11,13 +11,13 @@ def main(pixels):
     dwell = 0.25
     while i <= 3:
         # turn led's on
-        solid_color(rgbw=[0,0,0,255], sustain=dwell)
+        solid_color(rgbw=[0,0,0,255], sustain=dwell, pixels=pixels)
         # turn led's off
-        solid_color(sustain=dwell)
+        solid_color(sustain=dwell, pixels = pixels)
         i += 1
 
 
-def solid_color(rgbw=[0,0,0,0], sustain=None, pixels = pixels, verbose=True):
+def solid_color(pixels, rgbw=[0,0,0,0], sustain=None, verbose=True):
     '''
     Function to write RGBW values to neopixel given 4 value array and sustain time (in seconds)
     '''
@@ -26,7 +26,7 @@ def solid_color(rgbw=[0,0,0,0], sustain=None, pixels = pixels, verbose=True):
         sustain = 10 * 60  # n * 60sec = n minutes
 
     # write values to LEDs
-    pixels.fill(rgbw[0], rgbw[1], rgbw[2], rgbw[3])
+    pixels.fill((rgbw[0], rgbw[1], rgbw[2], rgbw[3]))
     pixels.show()
     time.sleep(sustain)
 
