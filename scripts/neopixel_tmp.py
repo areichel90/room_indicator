@@ -25,10 +25,10 @@ def main(pixels):
         # turn led's off
         solid_color(sustain=dwell, pixels = pixels)
         i += 1
-
+    '''
     while True:
         for color in colors:
-            scrolling_color(pixels, rgbw=color, speed = 0.5)
+            scrolling_color(pixels, rgbw=color, speed = 0.5)'''
 
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, verbose=True):
@@ -58,6 +58,29 @@ def scrolling_color(pixels, rgbw=[0,0,0,0], speed=1.0, pixel_count=pixel_count, 
         pixels.show()
         time.sleep(dwell)
         pixels[i]=(0,0,0,0)
+
+def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, pixel_count=pixel_count, sustain=None, verbost=True):
+    '''
+    '''
+    # calculate dwell from speed
+    num_elements = (pixel_count*2) - 1 
+    dwell = 1/(speed * num_elements)
+    if verbose: print(f'speed: {speed}\tdwell: {dwell}')
+
+    for b in range(100):
+        print(f'brightness: {i}')
+
+        pixels.brightness = b/100
+        pixels.fill(rgbw)
+        pixels.show()
+        time.sleep(dwell)
+    for b in range(100):
+        b = (100-1) - b
+        pixels.brightness = b/100
+        pixels.fill(rgbw)
+        pixels.show()
+        time.sleep(dwell)
+
 
 def solid_color(pixels, rgbw=[0,0,0,0], sustain=None, verbose=True):
     '''
