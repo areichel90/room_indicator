@@ -21,7 +21,7 @@ def main(pixels):
         print(f'{5-j}...')
         time.sleep(1)'''
 
-    print('Starting Flashing Sequence')
+    #print('Starting Flashing Sequence')
     while i <= 2:
         # turn led's on
         solid_color(rgbw=[0,0,0,255], sustain=dwell, pixels=pixels)
@@ -37,12 +37,15 @@ def main(pixels):
 
     # breathing color
     while True:
-        rgbw = np.random.rand(1,4)*255
+        rgbw = np.random.rand(1,4)*(255*1)
         rgbw = rgbw[0].tolist()
         rgbw = np.around(rgbw)
         rgbw = rgbw.astype(int)
         rgbw[3] = 0
+        # rgbw = (0,0,0,255)
         breathing_color(pixels, rgbw=rgbw, speed=0.5, fade_smoothness=100, verbose=False)
+        # clear random color value from memory
+        del rgbw
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=3.0, pixel_count=pixel_count, verbose=True):
     '''
@@ -78,7 +81,7 @@ def breathing_color(pixels, rgbw=(0,0,0,255), speed=1.0, fade_smoothness=200, su
     # calculate dwell from speed
     num_elements = (pixel_count*2) - 1 
     dwell = 1/(speed * fade_smoothness*2)
-    print(f'color: {rgbw}\tspeed: {speed}\tdwell: {dwell}')
+    if verbose: print(f'color: {rgbw}\tspeed: {speed}\tdwell: {dwell}')
     if verbose: print(f'color: {rgbw}\tspeed: {speed}\tdwell: {dwell}')
 
     for b in np.linspace(0,max_brightness,fade_smoothness):
