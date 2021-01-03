@@ -9,7 +9,7 @@ pixel_count = 8*2
 order = neopixel.GRBW
 
 # misc
-max_brightness = 50  # percent
+max_brightness = 30  # percent
 colors = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255)]
 
 def main(pixels):
@@ -38,34 +38,31 @@ def main(pixels):
 
     # breathing color
     while True:
-        '''rgbw = np.random.rand(1,4)*(255*1)
-        rgbw = rgbw[0].tolist()
-        rgbw = np.around(rgbw)
-        rgbw = rgbw.astype(int)
-        rgbw[3] = 0'''
         # rgbw = (0,0,0,255)
         rand_color = generate_random_color()
-        breathing_color(pixels, rgbw=rgbw, speed=0.5, fade_smoothness=100, verbose=False)
+        print(f'rgbw (final): {rand_color}')
+        breathing_color(pixels, rgbw=rand_color, speed=0.5, fade_smoothness=100, verbose=False)
         # clear random color value from memory
         del rand_color
 
-def generate_random_color():
+def generate_random_color(verbose=True):
     # randomly determine how many rgb values to omit
     omit_count = randrange(3)
-    print('to omit: {omit_count}')
+    if verbose: print(f'\nto omit: {omit_count}')
 
     # generate 1d array of random RGBW values
     rgbw = np.random.rand(1,4)*(255*1)
     rgbw = rgbw[0].tolist()
     rgbw = np.around(rgbw)
     rgbw = rgbw.astype(int)
+    if verbose: print(f'rgbw (raw): {rgbw}')   
     # mask random values
     count = 0
-    while count <= omit_count:
-        for i in rgbw:
-            mask = np.random.randint(2,1)
-            if mask == 1:
-                rgbw[i] = 0
+    while count < omit_count:
+        for c,i in enumerate(rgbw):
+            mask = np.random.randint(2,size=1)
+            if mask == 1 and count < omit_count:
+                rgbw[c] = 0
                 count += 1
             else:
                 continue
