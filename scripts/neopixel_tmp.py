@@ -1,5 +1,6 @@
 import numpy as np
 import board, neopixel, time
+from random import randrange
 
 
 # global variables
@@ -37,15 +38,43 @@ def main(pixels):
 
     # breathing color
     while True:
-        rgbw = np.random.rand(1,4)*(255*1)
+        '''rgbw = np.random.rand(1,4)*(255*1)
         rgbw = rgbw[0].tolist()
         rgbw = np.around(rgbw)
         rgbw = rgbw.astype(int)
-        rgbw[3] = 0
+        rgbw[3] = 0'''
         # rgbw = (0,0,0,255)
+        rand_color = generate_random_color()
         breathing_color(pixels, rgbw=rgbw, speed=0.5, fade_smoothness=100, verbose=False)
         # clear random color value from memory
-        del rgbw
+        del rand_color
+
+def generate_random_color():
+    # randomly determine how many rgb values to omit
+    omit_count = randrange(3)
+    print('to omit: {omit_count}')
+
+    # generate 1d array of random RGBW values
+    rgbw = np.random.rand(1,4)*(255*1)
+    rgbw = rgbw[0].tolist()
+    rgbw = np.around(rgbw)
+    rgbw = rgbw.astype(int)
+    # mask random values
+    count = 0
+    while count <= omit_count:
+        for i in rgbw:
+            mask = np.random.randint(2,1)
+            if mask == 1:
+                rgbw[i] = 0
+                count += 1
+            else:
+                continue
+
+    # mask W value
+    rgbw[3] = 0
+
+    return rgbw
+
 
 def scrolling_color(pixels, rgbw=[0,0,0,0], speed=3.0, pixel_count=pixel_count, verbose=True):
     '''
