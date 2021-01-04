@@ -56,7 +56,7 @@ def initialize_neopixels(digital_pin = digital_pin, pixel_count = pixel_count,
         pixel_order=pixel_order)
     return pixels
 
-def generate_random_color(verbose=True):
+def generate_random_color(verbose=False):
     # randomly determine how many rgb values to omit
     omit_count = randrange(3)
     if verbose: print(f'\nto omit: {omit_count}')
@@ -77,13 +77,12 @@ def generate_random_color(verbose=True):
                 count += 1
             else:
                 continue
-
     # mask W value
     rgbw[3] = 0
 
     return rgbw
 
-def pixel_flash(pixels, rgbw=(0,0,0,0), count=3, rate=3, verbose=False):
+def pixel_flash(pixels, rgbw=(0,0,0,255), count=3, rate=3, verbose=False):
     '''
     pixels: initialized neopixels
     rgbw: color to be displayed
@@ -93,7 +92,7 @@ def pixel_flash(pixels, rgbw=(0,0,0,0), count=3, rate=3, verbose=False):
     if verbose: print(f'Starting Flashing Sequence:')
     # calculate dwell from 'rate'
     dwell = (1./rate)/2
-    print(f'rate: {rate}\tdwell: {dwell}') 
+    if verbose: print(f'rate: {rate}\tdwell: {dwell}') 
 
     i=0
     while i < count:
