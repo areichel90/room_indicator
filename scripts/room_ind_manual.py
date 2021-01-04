@@ -2,8 +2,17 @@ import time, neopixel, board, argparse
 import neopixel_tmp as neopixels
 
 # global variables
-busy_pixels = [0,7]
-free_pixels = [8,15]
+busy_range = (0,8)
+busy_pixels = list(range(busy_range[0],busy_range[1]))
+free_range = (8,16)
+free_pixels = range(free_range[0], free_range[1])
+
+def show_as(pixles, color=(0,0,0,255), use_pixels=busy_pixels):
+    #turn off all pixels
+    pixels.fill((0,0,0,0))
+    for i in use_pixels:
+        pixels[i]=color
+    pixels.show()
 
 if __name__ == '__main__':
     # parse arguments
@@ -16,14 +25,36 @@ if __name__ == '__main__':
     if args.verbose:print(f'\nin meeting: {args.in_meeting}\tfree: {args.free}')
 
     # initialize neopixel setup
-    if verbose: print(f'\nInitializing Neopixels...')
+    if args.verbose: print(f'\nInitializing Neopixels...')
     pixels = neopixels.initialize_neopixels()
+    # turn off pixels
+    #neopixels.solid_color(pixels)
+
 
     # generate random color
     color = neopixels.generate_random_color()
     # flash all elements
-    neopixels.pixel_flash(pixels=pixels, rgbw = color, verbose=args.verbose)
-
-    pixels[0] = (0,0,0,255)
-    pixles.show()
-
+    #neopixels.pixel_flash(pixels=pixels, rgbw = color, 
+    #                      rate=5, verbose=args.verbose)
+    if args.in_meeting:
+        color = (255,0,0,0)
+        rand_color = neopixels.generate_random_color()
+        show_as(pixels, color=color, use_pixels=busy_pixels)
+    elif args.free:
+        color=(0,255,0,0)
+        rand_color = neopixels.generate_random_color()
+        show_as(pixels, color=color, use_pixels=free_pixels)
+    else:
+        # light one panel at a time
+        dwell = 1/2
+        while True:
+            # show as busy
+            color = neopixels.generate_random_color()
+            show_as(pixels, color=color, use_pixels=busy_pixels)
+            time.sleep(dwell)
+            pixels.fill((0,0,0,0))
+            # show as free
+            color = neopixels.generate_random_color()
+            show_as(pixels, color=color, use_pixels=free_pixels)
+            time.sleep(dwell)
+            pixels.fill((0,0,0,0))
