@@ -18,10 +18,10 @@ def main(pixels):
     dwell = 1.0/8  # seconds
 
     # countdown
-    start = 10
+    '''start = 10
     for j in range(start):
         print(f'{start-j}...')
-        time.sleep(1)
+        time.sleep(1)'''
 
     #print('Starting Flashing Sequence')
     while i <= 2:
@@ -154,7 +154,6 @@ if __name__ == '__main__':
 
     # initialize neopixel configuration
     pixels = initialize_neopixels()
-    
 
     # run main function
     main(pixels=pixels)
