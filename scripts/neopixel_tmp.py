@@ -165,7 +165,7 @@ def solid_color(pixels, rgbw=[0,0,0,0], sustain=None, verbose=True):
     # write values to LEDs
     pixels.fill((rgbw[0], rgbw[1], rgbw[2], rgbw[3]))
     pixels.show()
-    time.sleep(sustain)
+    if sustain != None:  time.sleep(sustain)
 
 if __name__ == '__main__':
     print('Starting NeoPixel Test Script!')
