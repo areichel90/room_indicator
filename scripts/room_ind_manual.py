@@ -4,8 +4,8 @@ import neopixel_tmp as neopixels
 if __name__ == '__main__':
     # parse arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("-m", "--in_meeting", help='boolean "in meeting" status', action='store_true', optional=True)
-    parser.add_argument("-f", "--free", help='boolean status for "not in meeting"', action='store_true', optional=True)
+    parser.add_argument("-m", "--in_meeting", help='boolean "in meeting" status', action='store_true', required==True)
+    parser.add_argument("-f", "--free", help='boolean status for "not in meeting"', action='store_true', required==True)
     parser.parse_args()
 
     # initialize neopixel setup
