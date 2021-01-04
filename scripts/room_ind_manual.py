@@ -1,6 +1,10 @@
 import time, neopixel, board, argparse
 import neopixel_tmp as neopixels
 
+# global variables
+busy_pixels = [0,7]
+free_pixels = [8,15]
+
 if __name__ == '__main__':
     # parse arguments
     parser = argparse.ArgumentParser()
@@ -20,5 +24,6 @@ if __name__ == '__main__':
     # flash all elements
     neopixels.pixel_flash(pixels=pixels, rgbw = color, verbose=args.verbose)
 
-
+    pixels[0] = (0,0,0,255)
+    pixles.show()
 
