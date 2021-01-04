@@ -17,10 +17,11 @@ def main(pixels):
     i = 0
     dwell = 1.0/8  # seconds
 
-    '''# countdown
-    for j in range(5):
-        print(f'{5-j}...')
-        time.sleep(1)'''
+    # countdown
+    start = 10
+    for j in range(start):
+        print(f'{start-j}...')
+        time.sleep(1)
 
     #print('Starting Flashing Sequence')
     while i <= 2:
