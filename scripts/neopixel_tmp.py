@@ -45,6 +45,16 @@ def main(pixels):
         # clear random color value from memory
         del rand_color
 
+def initialize_neopixels(digital_pin = digital_pin, pixel_count = pixel_count, 
+                            brightness=max_brightness, auto_write=False, pixel_order = order):
+    pixels = neopixel.NeoPixel(
+        digital_pin, 
+        pixel_count, 
+        brightness=brightness,
+        auto_write=auto_write,
+        pixel_order=pixel_order)
+    return pixels
+
 def generate_random_color(verbose=True):
     # randomly determine how many rgb values to omit
     omit_count = randrange(3)
@@ -141,13 +151,9 @@ def solid_color(pixels, rgbw=[0,0,0,0], sustain=None, verbose=True):
 if __name__ == '__main__':
     print('Starting NeoPixel Test Script!')
 
-    # setup neopixels
-    pixels = neopixel.NeoPixel(
-        digital_pin, 
-        pixel_count, 
-        brightness=0.5,
-        auto_write=False,
-        pixel_order=order)
+    # initialize neopixel configuration
+    pixels = initialize_neopixels()
+    
 
     # run main function
     main(pixels=pixels)
