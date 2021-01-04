@@ -83,20 +83,22 @@ def generate_random_color(verbose=True):
 
     return rgbw
 
-def pixel_flash(pixels = pixels, rgbw=(0,0,0,0), count=3, rate=3, verbose=False)
+def pixel_flash(pixels, rgbw=(0,0,0,0), count=3, rate=3, verbose=False):
     '''
     pixels: initialized neopixels
     rgbw: color to be displayed
     count: count of flashes to be displayed
     rate: rate of all flashes (cycles per second)
     '''
-    if verbose: print('Starting Flashing Sequence')
+    if verbose: print(f'Starting Flashing Sequence:')
     # calculate dwell from 'rate'
-    dwell = 1/rate  
+    dwell = (1./rate)/2
+    print(f'rate: {rate}\tdwell: {dwell}') 
 
-    while i <= 2:
+    i=0
+    while i < count:
         # turn led's on
-        solid_color(rgbw=[0,0,0,255], sustain=dwell, pixels=pixels)
+        solid_color(rgbw=rgbw, sustain=dwell, pixels=pixels)
         # turn led's off
         solid_color(sustain=dwell, pixels = pixels)
         i += 1
