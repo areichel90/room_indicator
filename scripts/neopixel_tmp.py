@@ -18,10 +18,10 @@ def main(pixels):
     dwell = 1.0/8  # seconds
 
     # countdown
-    '''start = 10
+    start = 5
     for j in range(start):
         print(f'{start-j}...')
-        time.sleep(1)'''
+        time.sleep(1)
 
     #print('Starting Flashing Sequence')
     while i <= 2:
@@ -32,16 +32,17 @@ def main(pixels):
         i += 1
 
     # single element scrolling sequence
-    '''
-    while True:
+    a=0
+    while a <= 3:
         for color in colors:
-            scrolling_color(pixels, rgbw=color, speed = 0.5)'''
+            scrolling_color(pixels, rgbw=color, speed = 0.5)
+            a+=1
 
     # breathing color
     while True:
         # rgbw = (0,0,0,255)
         rand_color = generate_random_color()
-        print(f'rgbw (final): {rand_color}')
+        #print(f'rgbw (final): {rand_color}')
         breathing_color(pixels, rgbw=rand_color, speed=0.5, fade_smoothness=100, verbose=False)
         # clear random color value from memory
         del rand_color
@@ -122,7 +123,7 @@ def scrolling_color(pixels, rgbw=[0,0,0,0], speed=3.0, pixel_count=pixel_count, 
         # turn pixel off
         pixels[i] = (0, 0, 0, 0)
         #time.sleep(dwell)
-    for i in range(1,7):
+    for i in range(1,pixel_count-1):
         i = (pixel_count-1)-i
         #print(f'pixels: {i}')
         pixels[i]= rgbw

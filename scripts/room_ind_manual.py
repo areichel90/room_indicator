@@ -37,11 +37,11 @@ if __name__ == '__main__':
     #neopixels.pixel_flash(pixels=pixels, rgbw = color, 
     #                      rate=5, verbose=args.verbose)
     if args.in_meeting:
-        color = (255,0,0,0)
+        color = (0,0,0,255)
         rand_color = neopixels.generate_random_color()
         show_as(pixels, color=color, use_pixels=busy_pixels)
     elif args.free:
-        color=(0,255,0,0)
+        color=(0,0,0,255)
         rand_color = neopixels.generate_random_color()
         show_as(pixels, color=color, use_pixels=free_pixels)
     else:
