@@ -1,18 +1,55 @@
+import numpy as np
 import time, neopixel, board, argparse
 import neopixel_tmp as neopixels
 
 # global variables
+max_brightness = 75  # percent
+fade_in_speed = 0.5  # second
+fade_out_speed = 0.5  # second
+
+# pixel assignment
 busy_range = (0,8)
 busy_pixels = list(range(busy_range[0],busy_range[1]))
-free_range = (8,16)
+free_range = (8,24)
 free_pixels = range(free_range[0], free_range[1])
 
-def show_as(pixles, color=(0,0,0,255), use_pixels=busy_pixels):
-    #turn off all pixels
-    pixels.fill((0,0,0,0))
+def calc_dwell(speed, smoothness):
+    requested = 1/(speed * smoothness)
+    #if requested < 0.0025
+    return requested
+
+def fade_in(pixels, speed=1.0, fade_smoothness=200, sustain=None):
+    # calculate dwell from speed
+    dwell = calc_dwell(speed=speed, smoothness=fade_smoothness)
+
+    for b in np.linspace(0, max_brightness, fade_smoothness):
+        #print(b)
+        pixels.brightness = b/100
+        pixels.show()
+        time.sleep(dwell)
+
+
+def fade_out(pixels, speed=1.0, fade_smoothness=200, sustain=None):
+    # calculate dwell from speed
+    dwell = calc_dwell(speed=speed, smoothness=fade_smoothness)
+    print(pixels)
+    for b in np.linspace(max_brightness, 0, fade_smoothness):
+        #print(b)
+        pixels.brightness = b/100
+        pixels.show()
+        time.sleep(dwell)
+
+
+def show_as(pixles, color=(0,0,0,255), fade_time=0.5, use_pixels=busy_pixels):
+    fade_out(pixels)
+
+    #pixels.fill((0,0,0,0))
+
     for i in use_pixels:
         pixels[i]=color
-    pixels.show()
+    fade_in(pixels, speed=fade_time, fade_smoothness=100)
+    #pixels.show()
+    #print(pixels)
 
 if __name__ == '__main__':
     # parse arguments
@@ -43,7 +80,7 @@ if __name__ == '__main__':
     elif args.free:
         color=(0,0,0,255)
         rand_color = neopixels.generate_random_color()
-        show_as(pixels, color=color, use_pixels=free_pixels)
+        show_as(pixels, color=color,  use_pixels=free_pixels)
     else:
         # light one panel at a time
         dwell = 1/2

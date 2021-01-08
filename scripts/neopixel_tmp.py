@@ -5,7 +5,7 @@ from random import randrange
 
 # global variables
 digital_pin = board.D18  # digital pin on rpi
-pixel_count = 8*2
+pixel_count = 8*3
 order = neopixel.GRBW
 
 # misc
