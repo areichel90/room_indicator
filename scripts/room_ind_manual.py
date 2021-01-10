@@ -3,15 +3,25 @@ import time, neopixel, board, argparse
 import neopixel_tmp as neopixels
 
 # global variables
-max_brightness = 75  # percent
+max_brightness = 10  # percent
 fade_in_speed = 0.5  # second
 fade_out_speed = 0.5  # second
 
 # pixel assignment
-busy_range = (0,8)
-busy_pixels = list(range(busy_range[0],busy_range[1]))
-free_range = (8,24)
-free_pixels = range(free_range[0], free_range[1])
+leftPanel_elements = ((0,7), (16,23), (23,39), (48,55))
+left_panel = create_panel_list(leftPanel_elements)
+rightPanel_elements = ((8,15), (24,31), (40,47), (56, 63))
+right_panel = create_panel_list(rightPanel_elements)
+
+def create_panel_list(panel_elements):
+    '''
+    function to create list of all elements in each display panel
+    '''
+    return_panel = []
+    for tup in panel_elements:
+        for i in np.linspace(tup[0], tup[1], 7):
+            return_panel.append(i)
+    return return_panel
 
 def calc_dwell(speed, smoothness):
     requested = 1/(speed * smoothness)
@@ -76,11 +86,11 @@ if __name__ == '__main__':
     if args.in_meeting:
         color = (0,0,0,255)
         rand_color = neopixels.generate_random_color()
-        show_as(pixels, color=color, use_pixels=busy_pixels)
+        show_as(pixels, color=color, use_pixels=left_panel)
     elif args.free:
         color=(0,0,0,255)
         rand_color = neopixels.generate_random_color()
-        show_as(pixels, color=color,  use_pixels=free_pixels)
+        show_as(pixels, color=color,  use_pixels=right_panel)
     else:
         # light one panel at a time
         dwell = 1/2
