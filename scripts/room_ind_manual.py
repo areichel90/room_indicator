@@ -3,7 +3,7 @@ import time, neopixel, board, argparse
 import neopixel_tmp as neopixels
 
 # global variables
-max_brightness = 75  # percent
+max_brightness = 10  # percent
 fade_in_speed = 0.5  # second
 fade_out_speed = 0.5  # second
 
