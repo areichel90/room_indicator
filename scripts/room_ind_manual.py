@@ -40,7 +40,7 @@ def fade_out(pixels, speed=1.0, fade_smoothness=200, sustain=None):
         time.sleep(dwell)
 
 
-def show_as(pixles, color=(0,0,0,255), fade_time=0.5, use_pixels=busy_pixels):
+def show_as(pixles, color=(0,0,0,255), fade_time=0.5, use_pixels=left_panel):
     fade_out(pixels)
 
     #pixels.fill((0,0,0,0))
