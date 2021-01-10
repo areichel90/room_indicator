@@ -6,7 +6,7 @@ from random import randrange
 
 # global variables
 digital_pin = board.D18  # digital pin on rpi
-pixel_count = 8*3
+pixel_count = 8*8
 order = neopixel.GRBW
 
 # misc
@@ -48,14 +48,15 @@ def main(pixels):
         # clear random color value from memory
         del rand_color
 
-def create_panel_list(panel_elements):
+def create_panel_list(panel_elements, verbose=False):
     '''
     function to create list of all elements in each display panel
     '''
     return_panel = []
     for tup in panel_elements:
-        for i in np.linspace(tup[0], tup[1], 7):
-            return_panel.append(i)
+        for i in np.linspace(tup[0], tup[1], 8):
+            return_panel.append(int(i))
+    if verbose: print(f"\npanel pixels: {return_panel}")
     return return_panel
 
 def initialize_neopixels(digital_pin = digital_pin, pixel_count = pixel_count, 
