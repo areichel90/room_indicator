@@ -1,3 +1,4 @@
+
 import numpy as np
 import board, neopixel, time
 from random import randrange
@@ -9,7 +10,7 @@ pixel_count = 8*3
 order = neopixel.GRBW
 
 # misc
-max_brightness = 30  # percent
+max_brightness = 10  # percent
 colors = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255)]
 
 def main(pixels):
