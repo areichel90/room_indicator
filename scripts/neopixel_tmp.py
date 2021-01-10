@@ -48,6 +48,16 @@ def main(pixels):
         # clear random color value from memory
         del rand_color
 
+def create_panel_list(panel_elements):
+    '''
+    function to create list of all elements in each display panel
+    '''
+    return_panel = []
+    for tup in panel_elements:
+        for i in np.linspace(tup[0], tup[1], 7):
+            return_panel.append(i)
+    return return_panel
+
 def initialize_neopixels(digital_pin = digital_pin, pixel_count = pixel_count, 
                             brightness=max_brightness, auto_write=False, pixel_order = order):
     pixels = neopixel.NeoPixel(
