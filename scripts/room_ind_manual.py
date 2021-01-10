@@ -9,19 +9,9 @@ fade_out_speed = 0.5  # second
 
 # pixel assignment
 leftPanel_elements = ((0,7), (16,23), (23,39), (48,55))
-left_panel = create_panel_list(leftPanel_elements)
+left_panel = neopixels.create_panel_list(leftPanel_elements)
 rightPanel_elements = ((8,15), (24,31), (40,47), (56, 63))
-right_panel = create_panel_list(rightPanel_elements)
-
-def create_panel_list(panel_elements):
-    '''
-    function to create list of all elements in each display panel
-    '''
-    return_panel = []
-    for tup in panel_elements:
-        for i in np.linspace(tup[0], tup[1], 7):
-            return_panel.append(i)
-    return return_panel
+right_panel = neopixels.create_panel_list(rightPanel_elements)
 
 def calc_dwell(speed, smoothness):
     requested = 1/(speed * smoothness)
