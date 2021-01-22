@@ -10,7 +10,7 @@ pixel_count = 8*8
 order = neopixel.GRBW
 
 # misc
-max_brightness = 10  # percent
+max_brightness = 30  # percent
 colors = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255)]
 
 def main(pixels):
